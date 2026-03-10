@@ -1,87 +1,132 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GTM </title>
-    <link rel="stylesheet" href="style.css">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>GTM</title>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<nav>
+			<div class="bar">
+				<a href="index.html" class="logo"
+					><img src="./images/Drift Icon.png" alt="logo"
+				/></a>
 
+				<!--Linking Pages-->
 
+				<ul>
+					<li><a href="index.html" class="active">Home</a></li>
+					<li><a href="fastlane.html">Fastlane</a></li>
+					<li><a href="widget.html">Widget</a></li>
+					<li><a href="embeddedCLP.html">Embedded CLP</a></li>
+					<li><a href="driftIdentify.html">Drift Identify</a></li>
+					<li><a href="gtm.html">GTM</a></li>
+				</ul>
+			</div>
+			`
+		</nav>
 
-<!--GTM TAG-->
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-MGSZRGV3');</script>
-  <!-- End Google Tag Manager -->
+		<!--===================END OF NAV BAR ==================================-->
 
-  <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MGSZRGV3"
-  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
+		<!--GTM TAG-->
+		<!-- Google Tag Manager -->
+		<script>
+			(function (w, d, s, l, i) {
+				w[l] = w[l] || [];
+				w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+				var f = d.getElementsByTagName(s)[0],
+					j = d.createElement(s),
+					dl = l != "dataLayer" ? "&l=" + l : "";
+				j.async = true;
+				j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+				f.parentNode.insertBefore(j, f);
+			})(window, document, "script", "dataLayer", "GTM-MGSZRGV3");
+		</script>
+		<!-- End Google Tag Manager -->
 
-  <!--=================GA4========================-->
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-CHBW326KS0"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+		<!-- Google Tag Manager (noscript) -->
+		<noscript
+			><iframe
+				src="https://www.googletagmanager.com/ns.html?id=GTM-MGSZRGV3"
+				height="0"
+				width="0"
+				style="display: none; visibility: hidden"
+			></iframe
+		></noscript>
+		<!-- End Google Tag Manager (noscript) -->
 
-  gtag('config', 'G-CHBW326KS0');
-</script>
+		<!--=================GA4========================-->
+		<!-- Google tag (gtag.js) -->
+		<script
+			async
+			src="https://www.googletagmanager.com/gtag/js?id=G-CHBW326KS0"
+		></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag() {
+				dataLayer.push(arguments);
+			}
+			gtag("js", new Date());
 
+			gtag("config", "G-CHBW326KS0");
+		</script>
 
-<script>
-window.drift.on("message", function(data) {
-  console.log("User received a message from ' + data.teamMember.name + ' in conversation " + data.conversationId);
-});
+		<script>
+			window.drift.on("message", function (data) {
+				console.log(
+					"User received a message from ' + data.teamMember.name + ' in conversation " +
+						data.conversationId,
+				);
+			});
+		</script>
 
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
 
-</script>
+		<script
+			charset="utf-8"
+			type="text/javascript"
+			src="//js.hsforms.net/forms/embed/v2.js"
+		></script>
+		<script>
+			hbspt.forms.create({
+				portalId: "8895416",
+				formId: "13dc66a0-8652-453a-8d28-45fa8a07513e",
+				region: "na1",
+			});
+		</script>
 
-<br>
-<br>
-<br>
-
-
-  <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/embed/v2.js"></script>
-<script>
-  hbspt.forms.create({
-    portalId: "8895416",
-    formId: "13dc66a0-8652-453a-8d28-45fa8a07513e",
-    region: "na1"
-  });
-</script>
-
-
-<script>
-if (window.drift) {
-var hiddenField = document.querySelector('input[name="drift_test"]')
-hiddenField.value = "Drift Loaded";
-} else {
-var hiddenField = document.querySelector('input[name="drift_test"]')
-hiddenField.value = "Drift NOT Loaded";}
-
-</script>
-<br>
-<!--
+		<script>
+			if (window.drift) {
+				var hiddenField = document.querySelector('input[name="drift_test"]');
+				hiddenField.value = "Drift Loaded";
+			} else {
+				var hiddenField = document.querySelector('input[name="drift_test"]');
+				hiddenField.value = "Drift NOT Loaded";
+			}
+		</script>
+		<br />
+		<!--
   <script src="//844-RKG-112.mktoweb.com/js/forms2/js/forms2.min.js"></script> 
   <form id="mktoForm_1113"></form> 
   <script>MktoForms2.loadForm("//844-RKG-112.mktoweb.com", "844-RKG-112", 1113);
 </script>
 -->
 
-<br>
-<br>
-<br>
+		<br />
+		<br />
+		<br />
 
-<br>
-<a href="https://tsedrift.netlify.app/gtm#link" class="GTM">TEST DRIFT LINK</a>
-
-  
-</body>
+		<br />
+		<a href="https://tsedrift.netlify.app/gtm#link" class="GTM"
+			>TEST DRIFT LINK</a
+		>
+	</body>
 </html>
