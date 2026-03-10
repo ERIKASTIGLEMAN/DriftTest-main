@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Integration Support Workshop  </title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+      body { font-family: Arial, sans-serif; padding: 20px; }
+      #searchInput { padding: 8px; width: 300px; margin-right: 10px; }
+      #searchButton { padding: 8px 12px; }
+      .highlight { background-color: yellow; }
+
+  /* The Modal background */
+  .modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5); /* Semi-transparent background */
+  }
+
+  /* Modal content box */
+  .modal-content {
+    position: relative;
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 0;
+    border-radius: 8px;
+    width: 60%; /* Adjust width */
+    max-width: 800px;
+    height: 70%; /* Adjust height */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  }
+
+  /* Close button */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    padding: 10px;
+    cursor: pointer;
+  }
+
+  .close:hover {
+    color: black;
+  }
+
+  /* iframe styling */
+  .modal-content iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    border-radius: 0 0 8px 8px;
+  }
+
+  </style>
+
+    <script src="main.js"></script>
+    
+   
+   
+   
+</head>
+<body>
+   <!--===================Dropdown for Drift & SL ==================================-->
+<div class="dropdown-container">
+  <div class="dropdown">
+    <label for="menu1">Drift:</label>
+    <select id="menu1" onchange="window.location.href=this.value">
+      <option value="#">Select a Feature</option>
+      <option value="https://testinglab.netlify.app/gtm">GTM</option>
+      <option value="https://testinglab.netlify.app/api">API</option>
+    </select>
+  </div>
+
+  <div class="dropdown">
+    <label for="menu2">Salesloft:</label>
+    <select id="menu2" onchange="window.location.href=this.value">
+      <option value="#">Select a Feature</option>
+      <option value="https://example.com/page3">Page 3</option>
+      <option value="https://example.com/page4">Page 4</option>
+    </select>
+  </div>
+</div>
+
+
+   <!--===================SEARCH BAR ==================================-->
+   <div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>   
+      <br>
+       <p>This is a paragraph of text with various words. Try searching for banana, cherry, or grape.</p>
+       <p>Another paragraph with more text and some repeating words like banana and apple.</p>
+       <p>Final paragraph mentioning fruits such as cherry and elderberry.</p>
+   
+       <input type="text" id="searchInput" placeholder="Search text on page..."/>
+       <button id="searchButton">Search</button>
+   
+       <script>
+           const searchInput = document.getElementById('searchInput');
+           const searchButton = document.getElementById('searchButton');
+   
+           function clearHighlights() {
+               document.querySelectorAll('.highlight').forEach(el => {
+                   const parent = el.parentNode;
+                   parent.replaceChild(document.createTextNode(el.textContent), el);
+                   parent.normalize();
+               });
+           }
+   
+           function highlightText(text) {
+               if (!text) return;
+   
+               const body = document.body;
+               const regex = new RegExp(`(${text})`, 'gi');
+   
+               const walker = document.createTreeWalker(body, NodeFilter.SHOW_TEXT, {
+                   acceptNode: function(node) {
+                       if (node.parentNode && node.parentNode.tagName !== 'SCRIPT' && node.parentNode.tagName !== 'STYLE') {
+                           return NodeFilter.FILTER_ACCEPT;
+                       }
+                       return NodeFilter.FILTER_REJECT;
+                   }
+               });
+   
+               while (walker.nextNode()) {
+                   const currentNode = walker.currentNode;
+                   if (regex.test(currentNode.textContent)) {
+                       const span = document.createElement('span');
+                       span.className = 'highlight';
+                       span.textContent = currentNode.textContent.match(regex)[0];
+   
+                       const newNode = currentNode.splitText(currentNode.textContent.search(regex));
+                       newNode.nodeValue = newNode.nodeValue.substring(span.textContent.length);
+                       currentNode.parentNode.insertBefore(span, newNode);
+                   }
+               }
+           }
+   
+           searchButton.addEventListener('click', function() {
+               clearHighlights();
+               const searchText = searchInput.value.trim();
+               if (searchText) {
+                   highlightText(searchText);
+               }
+           });
+       </script>
+   
+  </div>
+   
+
+<script>
+  drift.on('ready', function(api) {
+  drift.api.setUserAttributes({
+    bio: new URLSearchParams(window.location.search).get('smart')
+  });
+});
+</script>
+
+</div>
+<br>
+<br>
+    <br>
+    <br>
+
+
+  <!--=================== buttonClick==================================-->
+
+<!--<a href="https://chat.lastpass.com/EN_contact_sales" class="button-link">
+    Click Me
+</a>
+-->
+
+
+  <!--=================== Embed Iframe on Button Click ==================================-->
+
+<!-- Button to open modal -->
+<button id="openModalBtn">Open Chat</button>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <iframe
+      src="https://chat.lastpass.com/embed/270325/5091450"
+      id="drift-embed-frame"
+    ></iframe>
+  </div>
+</div>
+
+<script>
+  const modal = document.getElementById('myModal');
+  const btn = document.getElementById('openModalBtn');
+  const span = document.getElementsByClassName('close')[0];
+
+  // Open modal on button click
+  btn.onclick = function() {
+    modal.style.display = "block";
+  }
+
+  // Close modal on 'x' click
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+
+  // Close modal if user clicks outside the modal content
+  window.onclick = function(event) {
+    if (event.target === modal) {
+      modal.style.display = "none";
+    }
+  }
+</script>
+
+
+  <!--=================== startInteraction ==================================-->
+
+<!--------
+<script>
+drift.on ('ready',function(api){
+  drift.api.startInteraction({
+  interactionId: 260834, 
+goToConversation: true 
+
+});
+});
+console.log("PB");
+</script>
+-->
+
+</div>
+
+
+  <!--=================GA4========================-->
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CHBW326KS0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-CHBW326KS0');
+</script>
+
+  <!--=================== Data Layers ==================================-->
+
+<!--
+<script>
+  window.drift.on('ready', function(api){
+    window.drift.on("conversation:buttonClicked", function(data) {
+      console.log("conversation:buttonClicked" = JSON.stringify(data))
+      if (data.buttonBody === "Visit"){
+    window.location.href = "https://tsedrift.netlify.app/thankyou";
+   }
+    })
+  });
+</script>
+-->
+
+  <!----===================Payload Return for Drift Events ==================================-->
+
+ <script>
+  window.drift.on("startConversation", function(data) {
+    console.log("CHAT STARTED" + JSON.stringify(data))
+  })
+  </script>
+
+   <script>
+  window.drift.on("message:sent", function(data) {
+    console.log("MESSAGE SENT " + JSON.stringify(data))
+  })
+  </script>
+
+   <script>
+  window.drift.on("message", function(data) {
+    console.log("MESSAGE RECEIVED " + JSON.stringify(data))
+  })
+  </script>
+
+   <script>
+  window.drift.on("emailCapture", function(data) {
+    console.log("EMAIL CAPTURED " + JSON.stringify(data))
+  })
+  </script>
+
+   <script>
+  window.drift.on("phoneCapture", function(data) {
+    console.log("PHONE CAPTURED " + JSON.stringify(data))
+  })
+  </script>
+
+   <script>
+  window.drift.on("scheduling:meetingBooked", function(data) {
+    console.log("MEETING BOOKED " + JSON.stringify(data))
+  })
+  </script>
+
+   <script>
+  window.drift.on("conversation:playbookFired", function(data) {
+    console.log("PLAYBOOK FIRED " + JSON.stringify(data))
+  })
+  </script>
+ 
+ <script>
+window.drift.on("conversation:playbookClicked", function(data) {
+  console.log("Playbook CLICKED: " + JSON.stringify(data))
+})
+</script>
+
+  <script>
+window.drift.on("conversation:buttonClicked", function(data) {
+  console.log("user clicked a button with text: " + data.buttonBody);
+    console.log("playbookId " + data.playbookId);
+});
+  </script> 
+
+    <script>
+window.drift.on("conversation:playbookDismissed", function(data) {
+  console.log("user dismissed a playbook with id: " + data.playbookId);
+  console.log("playbookId " + data.playbookId);
+});
+  </script> 
+
+  <script>
+  window.drift.on("conversation:firstInteraction", function(data) {
+    console.log("FIRST INTERACTION " + JSON.stringify(data))
+  })
+  </script>
+  
+
+  <!--=================== Marketo Convo ==================================-->
+<!--Capture convo ID to save as attribute-->
+<script>
+  window.drift.on("conversation:firstInteraction", function(data) {
+    console.log('attribute'+  JSON.stringify(data))
+    drift.api.setUserAttributes({
+      recent_conversationId_mkto: data.conversationId
+    })
+ });
+
+ </script>
+
+
+
+  <!--=================== Dynamically Tracking Change in Online Status ==================================-->
+
+<!-- TURNED OFF
+<script>
+  // Initialize Drift
+  window.drift.on('ready', function(api, event) {
+    console.log('status' + JSON.stringify(event))
+      // Initial check for online/offline status
+      //checkOnlineStatus(event.data.isOnline);
+      ///console.log('status' + JSON.stringify(event))
+  })
+
+
+  window.drift.on("emailCapture", function(data) {
+  console.log("user identified as: " + JSON.stringify(data));
+  window.drift.on('ready', function(api, event) {
+    console.log('status' + JSON.stringify(event))
+      // Initial check for online/offline status
+      //checkOnlineStatus(event.data.isOnline);
+      ///console.log('status' + JSON.stringify(event))
+  })
+
+});
+
+
+  window.drift.on('statusChange', function(data) {
+    console.log('changed');
+        //checkOnlineStatus(data.isOnline);
+    });
+
+</script>
+-->
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+
+
+<button onclick="window.location.href='https://tsedrift.netlify.app/#engage';">Driftlink</button>
+
+<!--"window.location.href='https://wpengine.com/contact-sales/#chat';"-->
+
+</body>
+</html>
